@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Sign in — SecureVault{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <div class="auth-card">
+    <div class="eyebrow">WELCOME BACK</div>
+    <h1>Sign in</h1>
+    <p class="muted">Access your SecureVault account.</p>
+    <form method="post">
+      <label>Email<input type="email" name="email" required autocomplete="email"></label>
+      <label>Password<input type="password" name="password" required autocomplete="current-password"></label>
+      <button class="primary wide" type="submit">Sign in</button>
+    </form>
+    <a class="center-link" href="{{ url_for('main.forgot') }}">Forgot password?</a>
+    <p class="small center">New here? <a href="{{ url_for('main.register') }}">Create an account</a></p>
+  </div>
+</div>
+{% endblock %}

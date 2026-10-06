@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Admin — SecureVault{% endblock %}
+{% block content %}
+<section class="dash-head"><div><div class="eyebrow">ADMIN CONSOLE</div><h1>Customer management</h1><p class="muted">Authentication secrets remain private even from administrators.</p></div></section>
+<div class="stats"><div><span>Total customers</span><b>{{ total }}</b></div><div><span>Suspended</span><b>{{ suspended }}</b></div><div><span>Admin access</span><b>Restricted</b></div></div>
+<form class="search" method="get"><input name="q" value="{{ q }}" placeholder="Search by name or email"><button class="secondary">Search</button></form>
+<div class="table-wrap"><table><thead><tr><th>Customer</th><th>Email</th><th>Created</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+{% for user in users %}
+<tr><td><b>{{ user.name }}</b></td><td>{{ user.email }}</td><td>{{ user.created_at.strftime('%d %b %Y') }}</td><td>{{ "Suspended" if user.is_suspended else "Active" }}</td><td class="actions-cell">
+<a class="tiny" href="{{ url_for('main.admin_details', user_id=user.id) }}">Details</a>
+<form method="post" action="{{ url_for('main.admin_suspend', user_id=user.id) }}"><button class="tiny">{{ "Unsuspend" if user.is_suspended else "Suspend" }}</button></form>
+<form method="post" action="{{ url_for('main.admin_force_reset', user_id=user.id) }}" onsubmit="return confirm('Force this customer to recover their login password?')"><button class="tiny danger">Force reset</button></form>
+</td></tr>
+{% endfor %}
+</tbody></table></div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Verify OTP — SecureVault{% endblock %}
+{% block content %}
+<div class="auth-wrap"><div class="auth-card">
+<div class="eyebrow">EMAIL VERIFICATION</div><h1>Enter your code</h1>
+<p class="muted">The code expires in 10 minutes.</p>
+<form method="post">
+<label>6-digit OTP<input name="code" inputmode="numeric" maxlength="6" required></label>
+<button class="primary wide">Verify code</button>
+</form>
+</div></div>
+{% endblock %}

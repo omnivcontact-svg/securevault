@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Device verification — SecureVault{% endblock %}
+{% block content %}
+<div class="auth-wrap"><div class="auth-card">
+<div class="eyebrow">LAYER 2 OF 2</div>
+<h1>Verify your device</h1>
+{% if registered %}
+<p class="muted">Use the same device passkey you registered for SecureVault. Your fingerprint, Face ID, or Windows Hello data stays on your device.</p>
+<button class="primary wide" id="bioBtn" type="button">Verify with device</button>
+<p id="bioStatus" class="small center"></p>
+<p class="small center"><a class="center-link" href="{{ url_for('main.profile') }}">Manage device passkeys</a></p>
+{% else %}
+<p class="muted">No device passkey is registered for this account yet. Register Windows Hello, fingerprint, Face ID, or another passkey from your Profile page first.</p>
+<a class="primary wide" href="{{ url_for('main.profile') }}">Go to Profile</a>
+{% endif %}
+</div></div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+{% endblock %}

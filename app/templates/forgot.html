@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Recover account — SecureVault{% endblock %}
+{% block content %}
+<div class="auth-wrap"><div class="auth-card">
+<div class="eyebrow">ACCOUNT RECOVERY</div><h1>Forgot your password?</h1>
+<p class="muted">Choose email OTP or your three recovery questions.</p>
+<form method="post">
+<label>Account email<input type="email" name="email" required></label>
+<button class="primary wide">Send OTP</button>
+</form>
+<div class="or"><span>or</span></div>
+<form action="{{ url_for('main.security_questions') }}" method="get">
+<label>Account email<input type="email" name="email" required></label>
+<button class="secondary wide">Use security questions</button>
+</form>
+</div></div>
+{% endblock %}

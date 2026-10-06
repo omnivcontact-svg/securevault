@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Customer details — SecureVault{% endblock %}
+{% block content %}
+<div class="panel wide-card">
+<div class="eyebrow">ADMIN · CUSTOMER</div><h1>{{ user.name }}</h1>
+<div class="detail-grid">
+<div><span>Name</span><b>{{ user.name }}</b></div>
+<div><span>Email</span><b>{{ user.email }}</b></div>
+<div><span>Created</span><b>{{ user.created_at.strftime('%Y-%m-%d %H:%M') }}</b></div>
+<div><span>Status</span><b>{{ 'Suspended' if user.is_suspended else 'Active' }}</b></div>
+<div><span>Vault entries</span><b>{{ user.vault_items|length }}</b></div>
+<div><span>Device passkeys</span><b>{{ user.webauthn_credentials|length }}</b></div>
+</div>
+<div class="notice">Admins cannot view plaintext login passwords, master passwords, or decrypted vault credentials. Password recovery is handled through the user's recovery flow.</div>
+<br><a class="secondary" href="{{ url_for('main.admin_dashboard') }}">Back to admin</a>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}SecureVault — Private by design{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">PRIVATE BY DESIGN</div>
+    <h1>Your digital keys.<br><span>One secure vault.</span></h1>
+    <p>Store account credentials behind a dedicated vault password and a device-based biometric/passkey check.</p>
+    <div class="actions">
+      <a class="primary" href="{{ url_for('main.register') }}">Create your vault</a>
+      <a class="secondary" href="{{ url_for('main.login') }}">Sign in</a>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="shield">✓</div>
+    <h3>Two-step vault protection</h3>
+    <div class="security-row"><b>01</b><span>Vault master password</span><em>Verified</em></div>
+    <div class="security-row"><b>02</b><span>Face / fingerprint / passkey</span><em>Verified</em></div>
+    <div class="security-row"><b>03</b><span>Encrypted vault data</span><em>Protected</em></div>
+  </div>
+</section>
+{% endblock %}

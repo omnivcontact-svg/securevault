@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Profile — SecureVault{% endblock %}
+{% block content %}
+<div class="profile-grid">
+<div class="panel profile-card">
+<div class="avatar large">{% if user.profile_image %}<img src="{{ url_for('static', filename='uploads/' + user.profile_image) }}">{% else %}{{ user.name[:1].upper() }}{% endif %}</div>
+<h2>{{ user.name }}</h2><p class="muted">{{ user.email }}</p>
+</div>
+<div class="panel">
+<div class="eyebrow">PROFILE</div><h1>Account details</h1>
+<form method="post" enctype="multipart/form-data">
+<label>Full name<input name="name" value="{{ user.name }}" required></label>
+<label>Profile picture<input type="file" name="profile_image" accept=".png,.jpg,.jpeg,.webp"></label>
+<button class="primary" type="submit">Save profile</button>
+</form>
+<hr>
+<h2>Device security</h2>
+<p class="muted">Register this computer/phone's platform passkey. SecureVault never receives your fingerprint or face image.</p>
+<div class="notice small">Registered device passkeys: <b>{{ user.webauthn_credentials|length }}</b></div>
+<br>
+<button class="secondary" id="registerPasskey" type="button">Register device passkey</button>
+<p id="passkeyStatus" class="small"></p>
+</div>
+</div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+{% endblock %}

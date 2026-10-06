@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}SecureVault{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="{{ url_for('main.index') }}"><span class="brand-mark">S</span> SecureVault</a>
+  <nav>
+    {% if current_user %}
+      <a href="{{ url_for('main.dashboard') }}">Dashboard</a>
+      <a href="{{ url_for('main.profile') }}">Profile</a>
+      {% if current_user.is_admin %}<a href="{{ url_for('main.admin_dashboard') }}">Admin</a>{% endif %}
+      <a class="ghost" href="{{ url_for('main.logout') }}">Log out</a>
+    {% else %}
+      <a href="{{ url_for('main.login') }}">Sign in</a>
+      <a class="primary mini" href="{{ url_for('main.register') }}">Create account</a>
+    {% endif %}
+  </nav>
+</header>
+
+<main class="page">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="alerts">
+      {% for category, message in messages %}
+        <div class="alert {{ category }}">{{ message }}</div>
+      {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+
+<footer>SecureVault · Security-first password storage</footer>
+</body>
+</html>

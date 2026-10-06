@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Create account — SecureVault{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+<div class="auth-card wide-card">
+<div class="eyebrow">NEW VAULT</div>
+<h1>Create your secure account</h1>
+<p class="muted">Your login password and vault master password must be different.</p>
+<form method="post">
+  <div class="grid2">
+    <label>Full name<input name="name" required></label>
+    <label>Email<input type="email" name="email" required autocomplete="email"></label>
+  </div>
+  <div class="grid2">
+    <label>Login password<input type="password" name="password" minlength="12" required autocomplete="new-password"></label>
+    <label>Vault master password<input type="password" name="master_password" minlength="12" required autocomplete="new-password"></label>
+  </div>
+  <h3>Recovery questions</h3>
+  <p class="small muted">Answers are stored as hashes. Avoid answers that are easy for others to guess.</p>
+  <div class="grid2">
+    <label>Question 1
+      <select name="q1" required>
+        <option value="">Choose...</option><option>What was the name of your first school?</option><option>What was your childhood nickname?</option><option>What city were you born in?</option>
+      </select>
+    </label>
+    <label>Answer 1<input name="a1" required></label>
+    <label>Question 2
+      <select name="q2" required>
+        <option value="">Choose...</option><option>What was your first pet's name?</option><option>What was your favorite childhood book?</option><option>What was your first teacher's name?</option>
+      </select>
+    </label>
+    <label>Answer 2<input name="a2" required></label>
+    <label>Question 3
+      <select name="q3" required>
+        <option value="">Choose...</option><option>What was the first concert you attended?</option><option>What was your favorite school subject?</option><option>What was your first car/bike?</option>
+      </select>
+    </label>
+    <label>Answer 3<input name="a3" required></label>
+  </div>
+  <button class="primary wide">Create secure vault</button>
+</form>
+</div>
+</div>
+{% endblock %}

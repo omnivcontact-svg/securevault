@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Vault — SecureVault{% endblock %}
+{% block content %}
+<section class="dash-head">
+<div><div class="eyebrow">UNLOCKED</div><h1>Your saved credentials</h1><p class="muted">Encrypted at rest. This page is protected by your master password and device passkey.</p></div>
+<a class="secondary" href="{{ url_for('main.dashboard') }}">Lock vault</a>
+</section>
+<div class="vault-layout">
+<div class="vault-list">
+{% for item in items %}
+<article class="vault-item">
+<div><div class="item-icon">🔐</div><div><h3>{{ item.title }}</h3><p>{{ decrypt_text(item.encrypted_username) }}</p></div></div>
+<details><summary>View / edit</summary>
+<form method="post" action="{{ url_for('main.vault_edit', item_id=item.id) }}">
+<label>Title<input name="title" value="{{ item.title }}" required></label>
+<label>Username / email<input name="username" value="{{ decrypt_text(item.encrypted_username) }}"></label>
+<label>Password<input type="password" name="password" value="{{ decrypt_text(item.encrypted_password) }}" required></label>
+<label>Notes<textarea name="notes" rows="4">{{ decrypt_text(item.encrypted_notes) if item.encrypted_notes else '' }}</textarea></label>
+<button class="primary" type="submit">Save changes</button>
+</form>
+<form method="post" action="{{ url_for('main.vault_delete', item_id=item.id) }}" onsubmit="return confirm('Permanently delete this vault item?')">
+<button class="danger" type="submit">Delete permanently</button></form>
+</details>
+</article>
+{% else %}
+<div class="empty">No vault entries yet.</div>
+{% endfor %}
+</div>
+<div class="panel">
+<h2>Add credential</h2>
+<form method="post" action="{{ url_for('main.vault_add') }}">
+<label>Title<input name="title" placeholder="e.g. Email account" required></label>
+<label>Username / email<input name="username"></label>
+<label>Password<input type="password" name="password" required></label>
+<label>Notes<textarea name="notes" rows="4"></textarea></label>
+<button class="primary wide" type="submit">Save encrypted credential</button>
+</form>
+</div>
+</div>
+{% endblock %}

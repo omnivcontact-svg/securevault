@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Recovery questions — SecureVault{% endblock %}
+{% block content %}
+<div class="auth-wrap"><div class="auth-card">
+<div class="eyebrow">RECOVERY</div><h1>Verify your identity</h1>
+<form method="post">
+<input type="hidden" name="email" value="{{ user.email }}">
+<label>{{ user.security_q1 }}<input name="a1" required></label>
+<label>{{ user.security_q2 }}<input name="a2" required></label>
+<label>{{ user.security_q3 }}<input name="a3" required></label>
+<button class="primary wide">Verify answers</button>
+</form>
+</div></div>
+{% endblock %}

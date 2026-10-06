@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — SecureVault{% endblock %}
+{% block content %}
+<section class="dash-head">
+<div><div class="eyebrow">YOUR VAULT</div><h1>Good to see you, {{ current_user.name.split()[0] }}.</h1><p class="muted">Your credentials remain stored until you choose to delete them.</p></div>
+<a class="primary" href="{{ url_for('main.unlock') }}">Unlock vault</a>
+</section>
+<div class="stats">
+<div><span>Saved items</span><b>{{ items|length }}</b></div>
+<div><span>Vault protection</span><b>2-step</b></div>
+<div><span>Device passkey</span><b>{{ 'Ready' if has_passkey else 'Setup needed' }}</b></div>
+</div>
+{% if not has_passkey %}<div class="notice"><b>One setup step remains.</b> Open Profile and register a device passkey before unlocking the vault.</div>{% else %}<div class="notice"><b>Vault locked.</b> Viewing, editing and deleting saved credentials requires both your vault master password and registered device passkey.</div>{% endif %}
+{% endblock %}
